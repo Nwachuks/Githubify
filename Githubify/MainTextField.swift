@@ -33,6 +33,7 @@ class MainTextField: UITextField {
         
         backgroundColor = .tertiarySystemBackground
         autocorrectionType = .no
+        returnKeyType = .go
         
         placeholder = "Enter a username"
     }
