@@ -33,7 +33,10 @@ class SearchVC: UIViewController {
     @objc func showFollowersList() {
         usernameTextField.resignFirstResponder()
         
-        guard isUsernameEntered else { return }
+        guard isUsernameEntered else {
+            showAlert(title: "Empty Username", message: "Please enter a username. We need to know who to look for. 😀", btnTitle: "OK")
+            return
+        }
         let nextVC = FollowersListVC()
         nextVC.username = usernameTextField.text
         nextVC.title = usernameTextField.text
