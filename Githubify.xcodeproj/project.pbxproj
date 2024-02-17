@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B083BCC72B80F53C00E406F2 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = B083BCC62B80F53C00E406F2 /* Follower.swift */; };
+		B083BCC92B80F5BC00E406F2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B083BCC82B80F5BC00E406F2 /* User.swift */; };
 		B0D182F72B78F43500B41D53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D182F62B78F43500B41D53 /* AppDelegate.swift */; };
 		B0D182F92B78F43500B41D53 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D182F82B78F43500B41D53 /* SceneDelegate.swift */; };
 		B0D183002B78F43700B41D53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0D182FF2B78F43700B41D53 /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B083BCC62B80F53C00E406F2 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
+		B083BCC82B80F5BC00E406F2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B0D182F32B78F43500B41D53 /* Githubify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Githubify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D182F62B78F43500B41D53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0D182F82B78F43500B41D53 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,22 +74,56 @@
 		B0D182F52B78F43500B41D53 /* Githubify */ = {
 			isa = PBXGroup;
 			children = (
+				B0D1831E2B7A280C00B41D53 /* Helpers */,
+				B0D1831F2B7A285800B41D53 /* Models */,
+				B0D1831D2B7A27F600B41D53 /* Views */,
+				B0D1831C2B7A27D700B41D53 /* Controllers */,
 				B0D182F62B78F43500B41D53 /* AppDelegate.swift */,
 				B0D182F82B78F43500B41D53 /* SceneDelegate.swift */,
 				B0D182FF2B78F43700B41D53 /* Assets.xcassets */,
 				B0D183012B78F43700B41D53 /* LaunchScreen.storyboard */,
 				B0D183042B78F43700B41D53 /* Info.plist */,
-				B0D1830A2B79000A00B41D53 /* SearchVC.swift */,
-				B0D1830C2B79002D00B41D53 /* FavoritesListVC.swift */,
-				B0D1830E2B79077A00B41D53 /* MainButton.swift */,
-				B0D183102B79094E00B41D53 /* MainTextField.swift */,
-				B0D183122B7925EA00B41D53 /* FollowersListVC.swift */,
-				B0D183142B792D1C00B41D53 /* TitleLabel.swift */,
-				B0D183162B792E0100B41D53 /* BodyLabel.swift */,
-				B0D183182B792E7B00B41D53 /* AlertVC.swift */,
-				B0D1831A2B79325D00B41D53 /* Extensions.swift */,
 			);
 			path = Githubify;
+			sourceTree = "<group>";
+		};
+		B0D1831C2B7A27D700B41D53 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B0D1830C2B79002D00B41D53 /* FavoritesListVC.swift */,
+				B0D183122B7925EA00B41D53 /* FollowersListVC.swift */,
+				B0D1830A2B79000A00B41D53 /* SearchVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B0D1831D2B7A27F600B41D53 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B0D183182B792E7B00B41D53 /* AlertVC.swift */,
+				B0D183162B792E0100B41D53 /* BodyLabel.swift */,
+				B0D1830E2B79077A00B41D53 /* MainButton.swift */,
+				B0D183102B79094E00B41D53 /* MainTextField.swift */,
+				B0D183142B792D1C00B41D53 /* TitleLabel.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B0D1831E2B7A280C00B41D53 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B0D1831A2B79325D00B41D53 /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B0D1831F2B7A285800B41D53 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B083BCC62B80F53C00E406F2 /* Follower.swift */,
+				B083BCC82B80F5BC00E406F2 /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +196,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B083BCC92B80F5BC00E406F2 /* User.swift in Sources */,
 				B0D183172B792E0100B41D53 /* BodyLabel.swift in Sources */,
 				B0D183112B79094E00B41D53 /* MainTextField.swift in Sources */,
 				B0D183132B7925EA00B41D53 /* FollowersListVC.swift in Sources */,
@@ -165,6 +204,7 @@
 				B0D1830B2B79000A00B41D53 /* SearchVC.swift in Sources */,
 				B0D1830D2B79002D00B41D53 /* FavoritesListVC.swift in Sources */,
 				B0D182F72B78F43500B41D53 /* AppDelegate.swift in Sources */,
+				B083BCC72B80F53C00E406F2 /* Follower.swift in Sources */,
 				B0D183152B792D1C00B41D53 /* TitleLabel.swift in Sources */,
 				B0D182F92B78F43500B41D53 /* SceneDelegate.swift in Sources */,
 				B0D1831B2B79325D00B41D53 /* Extensions.swift in Sources */,
