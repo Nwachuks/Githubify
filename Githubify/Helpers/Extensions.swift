@@ -17,3 +17,17 @@ extension UIViewController {
         }
     }
 }
+
+extension UICollectionViewFlowLayout {
+    func createFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
+        let width = view.bounds.width
+        let padding: CGFloat = 12
+        let minimumSpacing: CGFloat = 10
+        let availableWidth: CGFloat = width - (padding * 2) - (minimumSpacing * 2)
+        let itemWidth: CGFloat = availableWidth / 3
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
+        return layout
+    }
+}

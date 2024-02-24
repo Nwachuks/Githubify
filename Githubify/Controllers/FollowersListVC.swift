@@ -9,9 +9,13 @@ import UIKit
 
 class FollowersListVC: UIViewController {
     
+    enum Section { case main }
+    
     var collectionView: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     
     var username: String?
+    var followers = [Follower]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +23,7 @@ class FollowersListVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         // Do any additional setup after loading the view.
         configureCollectionView()
+        configureDataSource()
         getFollowers()
     }
     
@@ -28,22 +33,27 @@ class FollowersListVC: UIViewController {
     }
 
     func configureCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createFlowLayout())
+        collectionView = UICollectionView(
+            frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout().createFlowLayout(in: view)
+        )
         view.addSubview(collectionView)
-        collectionView.backgroundColor = .systemPink
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
     }
     
-    func createFlowLayout() -> UICollectionViewFlowLayout {
-        let width = view.bounds.width
-        let padding: CGFloat = 12
-        let minimumSpacing: CGFloat = 10
-        let availableWidth: CGFloat = width - (padding * 2) - (minimumSpacing * 2)
-        let itemWidth: CGFloat = availableWidth / 3
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
-        return layout
+    func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { collectionView, indexPath, follower in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.reuseID, for: indexPath) as! FollowerCell
+            cell.set(follower: follower)
+            return cell
+        })
+    }
+    
+    func updateData() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(followers)
+        DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
     }
     
     func getFollowers() {
@@ -51,12 +61,11 @@ class FollowersListVC: UIViewController {
         NetworkManager.shared.getFollowers(for: username, page: 1) { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let followers):
-                print("Followers.count = \(followers.count)")
-                print(followers)
+            case .success(let result):
+                followers = result
+                updateData()
             case .failure(let error):
                 showAlert(title: "Bad Stuff Happened", message: error.rawValue, btnTitle: "OK")
-                return
             }
         }
     }
