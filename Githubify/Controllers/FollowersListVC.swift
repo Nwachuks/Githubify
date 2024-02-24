@@ -17,15 +17,16 @@ class FollowersListVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         // Do any additional setup after loading the view.
         guard let username else { return }
-        NetworkManager.shared.getFollowers(for: username, page: 1) { [weak self] followers, errorMessage in
+        NetworkManager.shared.getFollowers(for: username, page: 1) { [weak self] result in
             guard let self else { return }
-            guard let followers else {
-                showAlert(title: "Bad Stuff Happened", message: errorMessage ?? "", btnTitle: "OK")
+            switch result {
+            case .success(let followers):
+                print("Followers.count = \(followers.count)")
+                print(followers)
+            case .failure(let error):
+                showAlert(title: "Bad Stuff Happened", message: error.rawValue, btnTitle: "OK")
                 return
             }
-            
-            print("Followers.count = \(followers.count)")
-            print(followers)
         }
     }
     
