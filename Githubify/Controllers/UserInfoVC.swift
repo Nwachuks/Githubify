@@ -6,6 +6,12 @@
 //
 
 import UIKit
+import SafariServices
+
+protocol UserInfoDelegate: AnyObject {
+    func didTapGithubProfile(for user: User)
+    func didTapGetFollowers(for user: User)
+}
 
 class UserInfoVC: UIViewController {
     
@@ -15,6 +21,7 @@ class UserInfoVC: UIViewController {
     let dateLabel = BodyLabel(textAlignment: .center)
     
     var username = ""
+    weak var followerListDelegate: FollowerListDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +51,7 @@ class UserInfoVC: UIViewController {
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180),
+            headerView.heightAnchor.constraint(equalToConstant: 200),
             
             detailView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
@@ -80,15 +87,45 @@ class UserInfoVC: UIViewController {
             
             switch result {
             case .success(let user):
-                DispatchQueue.main.async {
-                    self.add(childVC: UserInfoHeaderVC(user: user), to: self.headerView)
-                    self.add(childVC: RepoItemVC(user: user), to: self.detailView)
-                    self.add(childVC: FollowerItemVC(user: user), to: self.subDetailView)
-                    self.dateLabel.text = "Github since \(user.createdAt.convertToDate().convertToMonthYearFormat())"
-                }
+                DispatchQueue.main.async { self.setupUI(with: user) }
             case .failure(let error):
                 showAlert(title: "Error occurred", message: error.rawValue, btnTitle: "OK")
             }
+        }
+    }
+    
+    func setupUI(with user: User) {
+        let repoItemVC = RepoItemVC(user: user)
+        repoItemVC.userInfoDelegate = self
+        
+        let followerItemVC = FollowerItemVC(user: user)
+        followerItemVC.userInfoDelegate = self
+        
+        self.add(childVC: UserInfoHeaderVC(user: user), to: self.headerView)
+        self.add(childVC: repoItemVC, to: self.detailView)
+        self.add(childVC: followerItemVC, to: self.subDetailView)
+        self.dateLabel.text = "Github since \(user.createdAt.convertToDate().convertToMonthYearFormat())"
+    }
+}
+
+extension UserInfoVC: UserInfoDelegate {
+    func didTapGithubProfile(for user: User) {
+        guard let url = URL(string: user.htmlUrl) else {
+            showAlert(title: "Invalid URL", message: "The url attached to this user is invalid.", btnTitle: "OK")
+            return
+        }
+        
+        presentSafariVC(with: url)
+    }
+    
+    func didTapGetFollowers(for user: User) {
+        guard user.followers > 0 else {
+            showAlert(title: "No followers", message: "This user has no followers. What a shame! 😞", btnTitle: "OK")
+            return
+        }
+        
+        dismiss(animated: true) {
+            self.followerListDelegate.didRequestFollowers(for: user.login)
         }
     }
 }

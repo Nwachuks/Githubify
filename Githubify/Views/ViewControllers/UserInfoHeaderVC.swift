@@ -91,9 +91,7 @@ class UserInfoHeaderVC: UIViewController {
             bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: textImagePadding),
             bioLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            bioLabel.heightAnchor.constraint(equalToConstant: 60),
-//            bioLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding)
+            bioLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5)
         ])
     }
-
 }

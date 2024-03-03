@@ -16,9 +16,14 @@ class RepoItemVC: ItemInfoVC {
     }
     
     private func configureItems() {
-        firstItemInfoView.set(itemInfoType: .repos, count: user?.publicRepos ?? 0)
-        secondItemInfoView.set(itemInfoType: .gists, count: user?.publicGists ?? 0)
+        guard let user else { return }
+        firstItemInfoView.set(itemInfoType: .repos, count: user.publicRepos)
+        secondItemInfoView.set(itemInfoType: .gists, count: user.publicGists)
         actionBtn.set(backgroundColor: .systemPurple, title: "Github Profile")
     }
-
+    
+    override func actionBtnTapped() {
+        guard let user else { return }
+        userInfoDelegate.didTapGithubProfile(for: user)
+    }
 }

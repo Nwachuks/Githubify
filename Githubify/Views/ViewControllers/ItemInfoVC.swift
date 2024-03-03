@@ -15,6 +15,7 @@ class ItemInfoVC: UIViewController {
     let actionBtn = MainButton()
     
     var user: User?
+    weak var userInfoDelegate: UserInfoDelegate!
 
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
@@ -29,6 +30,7 @@ class ItemInfoVC: UIViewController {
         super.viewDidLoad()
         configureBackgroundView()
         configureStackView()
+        configureActionBtn()
         // Do any additional setup after loading the view.
         layoutUI()
     }
@@ -45,6 +47,12 @@ class ItemInfoVC: UIViewController {
         stackView.addArrangedSubview(firstItemInfoView)
         stackView.addArrangedSubview(secondItemInfoView)
     }
+    
+    func configureActionBtn() {
+        actionBtn.addTarget(self, action: #selector(actionBtnTapped), for: .touchUpInside)
+    }
+    
+    @objc func actionBtnTapped() {}
     
     private func layoutUI() {
         view.addSubview(stackView)

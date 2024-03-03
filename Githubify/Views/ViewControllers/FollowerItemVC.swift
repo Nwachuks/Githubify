@@ -16,8 +16,14 @@ class FollowerItemVC: ItemInfoVC {
     }
     
     private func configureItems() {
-        firstItemInfoView.set(itemInfoType: .followers, count: user?.followers ?? 0)
-        secondItemInfoView.set(itemInfoType: .following, count: user?.following ?? 0)
+        guard let user else { return }
+        firstItemInfoView.set(itemInfoType: .followers, count: user.followers)
+        secondItemInfoView.set(itemInfoType: .following, count: user.following)
         actionBtn.set(backgroundColor: .systemGreen, title: "Get Followers")
+    }
+    
+    override func actionBtnTapped() {
+        guard let user else { return }
+        userInfoDelegate.didTapGetFollowers(for: user)
     }
 }
