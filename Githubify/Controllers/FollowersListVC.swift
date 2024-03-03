@@ -29,6 +29,9 @@ class FollowersListVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBtnTapped))
+        navigationItem.rightBarButtonItem = addBtn
         // Do any additional setup after loading the view.
         configureCollectionView()
         configureSearchController()
@@ -96,6 +99,30 @@ class FollowersListVC: UIViewController {
                 updateData(on: self.followers)
             case .failure(let error):
                 showAlert(title: "Bad Stuff Happened", message: error.rawValue, btnTitle: "OK")
+            }
+        }
+    }
+    
+    @objc func addBtnTapped() {
+        guard let username else { return }
+        showLoadingView()
+        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+            guard let self else { return }
+            self.dismissLoadingView()
+            
+            switch result {
+            case .success(let user):
+                let favourite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+                PersistenceManager.updateWith(favourite: favourite, actionType: .add) { [weak self] error in
+                    guard let self else { return }
+                    guard let error else {
+                        showAlert(title: "Success!", message: "You have successfully favourited this user. 🎉", btnTitle: "OK")
+                        return
+                    }
+                    showAlert(title: "Error occurred", message: error.rawValue, btnTitle: "OK")
+                }
+            case .failure(let failure):
+                showAlert(title: "Something went wrong", message: failure.rawValue, btnTitle: "OK")
             }
         }
     }

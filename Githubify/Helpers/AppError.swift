@@ -12,4 +12,6 @@ enum AppError: String, Error {
     case invalidCompletion = "Unable to complete your request. Please check your internet connection."
     case invalidResponse = "Invalid server response. Please try again later."
     case invalidData = "Data received is invalid. Please try again."
+    case unableToFavorite = "There was an error favoriting this user. Please try again."
+    case alreadyInFavorites = "You've already favorited this user. You must really like them."
 }
