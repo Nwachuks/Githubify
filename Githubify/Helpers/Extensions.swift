@@ -67,3 +67,21 @@ extension UICollectionViewFlowLayout {
         return layout
     }
 }
+
+extension String {
+    func convertToDate() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-DD'T'HH:mm:ssZ"
+        dateFormatter.locale = Locale(identifier: "en_GB")
+        dateFormatter.timeZone = .current
+        return dateFormatter.date(from: self) ?? Date()
+    }
+}
+
+extension Date {
+    func convertToMonthYearFormat() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM yyyy"
+        return dateFormatter.string(from: self)
+    }
+}

@@ -12,6 +12,7 @@ class UserInfoVC: UIViewController {
     let headerView = UIView()
     let detailView = UIView()
     let subDetailView = UIView()
+    let dateLabel = BodyLabel(textAlignment: .center)
     
     var username = ""
 
@@ -29,10 +30,12 @@ class UserInfoVC: UIViewController {
         view.addSubview(headerView)
         view.addSubview(detailView)
         view.addSubview(subDetailView)
+        view.addSubview(dateLabel)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
         detailView.translatesAutoresizingMaskIntoConstraints = false
         subDetailView.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
         let padding: CGFloat = 20
         let itemHeight: CGFloat = 150
@@ -52,6 +55,11 @@ class UserInfoVC: UIViewController {
             subDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             subDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             subDetailView.heightAnchor.constraint(equalToConstant: itemHeight),
+            
+            dateLabel.topAnchor.constraint(equalTo: subDetailView.bottomAnchor, constant: padding),
+            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            dateLabel.heightAnchor.constraint(equalToConstant: 18),
         ])
     }
     
@@ -76,6 +84,7 @@ class UserInfoVC: UIViewController {
                     self.add(childVC: UserInfoHeaderVC(user: user), to: self.headerView)
                     self.add(childVC: RepoItemVC(user: user), to: self.detailView)
                     self.add(childVC: FollowerItemVC(user: user), to: self.subDetailView)
+                    self.dateLabel.text = "Github since \(user.createdAt.convertToDate().convertToMonthYearFormat())"
                 }
             case .failure(let error):
                 showAlert(title: "Error occurred", message: error.rawValue, btnTitle: "OK")
