@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0004EAA2B9480BE00784A42 /* ItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0004EA92B9480BE00784A42 /* ItemInfoView.swift */; };
+		B0004EAC2B94840F00784A42 /* ItemInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0004EAB2B94840F00784A42 /* ItemInfoVC.swift */; };
+		B0004EAE2B94867F00784A42 /* RepoItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0004EAD2B94867F00784A42 /* RepoItemVC.swift */; };
+		B0004EB02B94883A00784A42 /* FollowerItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0004EAF2B94883A00784A42 /* FollowerItemVC.swift */; };
 		B04E86AE2B8DBFC600CD9488 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E86AD2B8DBFC600CD9488 /* UserInfoVC.swift */; };
 		B04E86B12B8DC85F00CD9488 /* UserInfoHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E86B02B8DC85F00CD9488 /* UserInfoHeaderVC.swift */; };
 		B04E86B32B8DC8BD00CD9488 /* SubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E86B22B8DC8BD00CD9488 /* SubtitleLabel.swift */; };
@@ -34,6 +38,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B0004EA92B9480BE00784A42 /* ItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoView.swift; sourceTree = "<group>"; };
+		B0004EAB2B94840F00784A42 /* ItemInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoVC.swift; sourceTree = "<group>"; };
+		B0004EAD2B94867F00784A42 /* RepoItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoItemVC.swift; sourceTree = "<group>"; };
+		B0004EAF2B94883A00784A42 /* FollowerItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerItemVC.swift; sourceTree = "<group>"; };
 		B04E86AD2B8DBFC600CD9488 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 		B04E86B02B8DC85F00CD9488 /* UserInfoHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeaderVC.swift; sourceTree = "<group>"; };
 		B04E86B22B8DC8BD00CD9488 /* SubtitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleLabel.swift; sourceTree = "<group>"; };
@@ -76,6 +84,9 @@
 		B04E86AF2B8DC84300CD9488 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B0004EAF2B94883A00784A42 /* FollowerItemVC.swift */,
+				B0004EAB2B94840F00784A42 /* ItemInfoVC.swift */,
+				B0004EAD2B94867F00784A42 /* RepoItemVC.swift */,
 				B04E86B02B8DC85F00CD9488 /* UserInfoHeaderVC.swift */,
 			);
 			path = ViewControllers;
@@ -145,6 +156,7 @@
 				B0D183102B79094E00B41D53 /* MainTextField.swift */,
 				B04E86B22B8DC8BD00CD9488 /* SubtitleLabel.swift */,
 				B0D183142B792D1C00B41D53 /* TitleLabel.swift */,
+				B0004EA92B9480BE00784A42 /* ItemInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,7 +257,9 @@
 				B04E86B12B8DC85F00CD9488 /* UserInfoHeaderVC.swift in Sources */,
 				B0D183172B792E0100B41D53 /* BodyLabel.swift in Sources */,
 				B076CBA72B8A09AE0042E937 /* AppError.swift in Sources */,
+				B0004EB02B94883A00784A42 /* FollowerItemVC.swift in Sources */,
 				B0D183112B79094E00B41D53 /* MainTextField.swift in Sources */,
+				B0004EAC2B94840F00784A42 /* ItemInfoVC.swift in Sources */,
 				B0D183132B7925EA00B41D53 /* FollowersListVC.swift in Sources */,
 				B0D183192B792E7B00B41D53 /* AlertVC.swift in Sources */,
 				B076CBAC2B8A12270042E937 /* AppImageView.swift in Sources */,
@@ -253,6 +267,8 @@
 				B076CBAA2B8A11B70042E937 /* FollowerCell.swift in Sources */,
 				B0D1830D2B79002D00B41D53 /* FavoritesListVC.swift in Sources */,
 				B0D182F72B78F43500B41D53 /* AppDelegate.swift in Sources */,
+				B0004EAE2B94867F00784A42 /* RepoItemVC.swift in Sources */,
+				B0004EAA2B9480BE00784A42 /* ItemInfoView.swift in Sources */,
 				B083BCC72B80F53C00E406F2 /* Follower.swift in Sources */,
 				B04E86AE2B8DBFC600CD9488 /* UserInfoVC.swift in Sources */,
 				B0D183152B792D1C00B41D53 /* TitleLabel.swift in Sources */,

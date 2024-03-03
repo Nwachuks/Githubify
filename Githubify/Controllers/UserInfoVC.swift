@@ -35,7 +35,7 @@ class UserInfoVC: UIViewController {
         subDetailView.translatesAutoresizingMaskIntoConstraints = false
         
         let padding: CGFloat = 20
-        let itemHeight: CGFloat = 140
+        let itemHeight: CGFloat = 150
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -74,6 +74,8 @@ class UserInfoVC: UIViewController {
             case .success(let user):
                 DispatchQueue.main.async {
                     self.add(childVC: UserInfoHeaderVC(user: user), to: self.headerView)
+                    self.add(childVC: RepoItemVC(user: user), to: self.detailView)
+                    self.add(childVC: FollowerItemVC(user: user), to: self.subDetailView)
                 }
             case .failure(let error):
                 showAlert(title: "Error occurred", message: error.rawValue, btnTitle: "OK")
