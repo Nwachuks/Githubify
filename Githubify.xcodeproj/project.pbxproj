@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B04E86AE2B8DBFC600CD9488 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E86AD2B8DBFC600CD9488 /* UserInfoVC.swift */; };
+		B04E86B12B8DC85F00CD9488 /* UserInfoHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E86B02B8DC85F00CD9488 /* UserInfoHeaderVC.swift */; };
+		B04E86B32B8DC8BD00CD9488 /* SubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E86B22B8DC8BD00CD9488 /* SubtitleLabel.swift */; };
+		B04E86B52B8DD15600CD9488 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E86B42B8DD15600CD9488 /* Constants.swift */; };
 		B076CBA72B8A09AE0042E937 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B076CBA62B8A09AE0042E937 /* AppError.swift */; };
 		B076CBAA2B8A11B70042E937 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B076CBA92B8A11B70042E937 /* FollowerCell.swift */; };
 		B076CBAC2B8A12270042E937 /* AppImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B076CBAB2B8A12270042E937 /* AppImageView.swift */; };
@@ -32,6 +35,9 @@
 
 /* Begin PBXFileReference section */
 		B04E86AD2B8DBFC600CD9488 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
+		B04E86B02B8DC85F00CD9488 /* UserInfoHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoHeaderVC.swift; sourceTree = "<group>"; };
+		B04E86B22B8DC8BD00CD9488 /* SubtitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleLabel.swift; sourceTree = "<group>"; };
+		B04E86B42B8DD15600CD9488 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B076CBA62B8A09AE0042E937 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		B076CBA92B8A11B70042E937 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		B076CBAB2B8A12270042E937 /* AppImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImageView.swift; sourceTree = "<group>"; };
@@ -67,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B04E86AF2B8DC84300CD9488 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B04E86B02B8DC85F00CD9488 /* UserInfoHeaderVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		B076CBA82B8A119E0042E937 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +135,7 @@
 		B0D1831D2B7A27F600B41D53 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B04E86AF2B8DC84300CD9488 /* ViewControllers */,
 				B076CBA82B8A119E0042E937 /* Cells */,
 				B0D183182B792E7B00B41D53 /* AlertVC.swift */,
 				B076CBAB2B8A12270042E937 /* AppImageView.swift */,
@@ -128,6 +143,7 @@
 				B076CBAD2B8B59200042E937 /* EmptyStateView.swift */,
 				B0D1830E2B79077A00B41D53 /* MainButton.swift */,
 				B0D183102B79094E00B41D53 /* MainTextField.swift */,
+				B04E86B22B8DC8BD00CD9488 /* SubtitleLabel.swift */,
 				B0D183142B792D1C00B41D53 /* TitleLabel.swift */,
 			);
 			path = Views;
@@ -137,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				B076CBA62B8A09AE0042E937 /* AppError.swift */,
+				B04E86B42B8DD15600CD9488 /* Constants.swift */,
 				B0D1831A2B79325D00B41D53 /* Extensions.swift */,
 				B083BCCA2B80F7FA00E406F2 /* NetworkManager.swift */,
 			);
@@ -223,7 +240,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B076CBAE2B8B59200042E937 /* EmptyStateView.swift in Sources */,
+				B04E86B52B8DD15600CD9488 /* Constants.swift in Sources */,
 				B083BCC92B80F5BC00E406F2 /* User.swift in Sources */,
+				B04E86B12B8DC85F00CD9488 /* UserInfoHeaderVC.swift in Sources */,
 				B0D183172B792E0100B41D53 /* BodyLabel.swift in Sources */,
 				B076CBA72B8A09AE0042E937 /* AppError.swift in Sources */,
 				B0D183112B79094E00B41D53 /* MainTextField.swift in Sources */,
@@ -237,6 +256,7 @@
 				B083BCC72B80F53C00E406F2 /* Follower.swift in Sources */,
 				B04E86AE2B8DBFC600CD9488 /* UserInfoVC.swift in Sources */,
 				B0D183152B792D1C00B41D53 /* TitleLabel.swift in Sources */,
+				B04E86B32B8DC8BD00CD9488 /* SubtitleLabel.swift in Sources */,
 				B083BCCB2B80F7FA00E406F2 /* NetworkManager.swift in Sources */,
 				B0D182F92B78F43500B41D53 /* SceneDelegate.swift in Sources */,
 				B0D1831B2B79325D00B41D53 /* Extensions.swift in Sources */,
