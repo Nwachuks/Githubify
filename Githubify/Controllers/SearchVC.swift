@@ -27,6 +27,7 @@ class SearchVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        usernameTextField.text = ""
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
@@ -37,21 +38,22 @@ class SearchVC: UIViewController {
             showAlert(title: "Empty Username", message: "Please enter a username. We need to know who to look for. 😀", btnTitle: "OK")
             return
         }
+        usernameTextField.resignFirstResponder()
+        
         let nextVC = FollowersListVC()
         nextVC.username = usernameTextField.text
-        nextVC.title = usernameTextField.text
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
     func setupKeyboardTapGestures() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
     }
     
     func configureLogoImageView() {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.image = UIImage(named: "gh-logo")
+        logoImageView.image = Images.githubLogo
         
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),

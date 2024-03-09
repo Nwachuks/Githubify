@@ -37,6 +37,7 @@ class FollowersListVC: UIViewController {
         configureSearchController()
         configureDataSource()
         guard let username else { return }
+        title = username
         getFollowers(username: username, page: page)
     }
     

@@ -5,7 +5,7 @@
 //  Created by Nwachukwu Ejiofor on 27/02/2024.
 //
 
-import Foundation
+import UIKit
 
 enum SFSymbols {
     static let location = "mappin.and.ellipse"
@@ -13,4 +13,8 @@ enum SFSymbols {
     static let gists = "text.alignleft"
     static let following = "heart"
     static let followers = "person.2"
+}
+
+enum Images {
+    static let githubLogo = UIImage(named: "gh-logo")
 }

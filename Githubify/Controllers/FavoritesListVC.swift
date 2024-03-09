@@ -74,7 +74,6 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
         let favorite = favorites[indexPath.row]
         let nextVC = FollowersListVC()
         nextVC.username = favorite.login
-        nextVC.title = favorite.login
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
