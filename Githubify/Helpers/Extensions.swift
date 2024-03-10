@@ -61,6 +61,12 @@ extension UIViewController {
     }
 }
 
+extension UIView {
+    func addSubviews(_ views: UIView...) {
+        for view in views { addSubview(view) }
+    }
+}
+
 extension UICollectionViewFlowLayout {
     func createFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
         let width = view.bounds.width

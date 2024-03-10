@@ -43,6 +43,8 @@ class AlertVC: UIViewController {
     
     func configureContainerView() {
         view.addSubview(containerView)
+        containerView.addSubviews(titleLabel, actionBtn, messageLabel)
+        
         containerView.layer.cornerRadius = 16
         containerView.layer.borderWidth = 2
         containerView.layer.borderColor = UIColor.white.cgColor
@@ -58,7 +60,6 @@ class AlertVC: UIViewController {
     }
 
     func configureTitleLabel() {
-        containerView.addSubview(titleLabel)
         titleLabel.text = alertTitle ?? "Error occurred"
         
         NSLayoutConstraint.activate([
@@ -70,7 +71,6 @@ class AlertVC: UIViewController {
     }
     
     func configureActionButton() {
-        containerView.addSubview(actionBtn)
         actionBtn.setTitle(btnTitle ?? "OK", for: .normal)
         actionBtn.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         
@@ -87,7 +87,6 @@ class AlertVC: UIViewController {
     }
     
     func configureMessageLabel() {
-        containerView.addSubview(messageLabel)
         messageLabel.text = message ?? "Unable to complete request"
         messageLabel.numberOfLines = 4
         

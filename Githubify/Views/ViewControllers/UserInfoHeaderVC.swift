@@ -29,8 +29,8 @@ class UserInfoHeaderVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubviews(avatarImageView, usernameLabel, nameLabel, locationImageView, locationLabel, bioLabel)
         // Do any additional setup after loading the view.
-        addSubviews()
         layoutUI()
         setup()
     }
@@ -53,15 +53,6 @@ class UserInfoHeaderVC: UIViewController {
             guard let self else { return }
             DispatchQueue.main.async { self.avatarImageView.image = image }
         }
-    }
-    
-    func addSubviews() {
-        view.addSubview(avatarImageView)
-        view.addSubview(usernameLabel)
-        view.addSubview(nameLabel)
-        view.addSubview(locationImageView)
-        view.addSubview(locationLabel)
-        view.addSubview(bioLabel)
     }
     
     func layoutUI() {

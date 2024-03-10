@@ -9,8 +9,7 @@ import UIKit
 import SafariServices
 
 protocol UserInfoDelegate: AnyObject {
-    func didTapGithubProfile(for user: User)
-    func didTapGetFollowers(for user: User)
+    func didRequestFollowers(for username: String)
 }
 
 class UserInfoVC: UIViewController {
@@ -21,7 +20,7 @@ class UserInfoVC: UIViewController {
     let dateLabel = BodyLabel(textAlignment: .center)
     
     var username = ""
-    weak var followerListDelegate: FollowerListDelegate!
+    weak var userInfoDelegate: UserInfoDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +33,7 @@ class UserInfoVC: UIViewController {
     }
     
     func layoutUI() {
-        view.addSubview(headerView)
-        view.addSubview(detailView)
-        view.addSubview(subDetailView)
-        view.addSubview(dateLabel)
+        view.addSubviews(headerView, detailView, subDetailView, dateLabel)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
         detailView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,10 +92,10 @@ class UserInfoVC: UIViewController {
     
     func setupUI(with user: User) {
         let repoItemVC = RepoItemVC(user: user)
-        repoItemVC.userInfoDelegate = self
+        repoItemVC.itemInfoDelegate = self
         
         let followerItemVC = FollowerItemVC(user: user)
-        followerItemVC.userInfoDelegate = self
+        followerItemVC.itemInfoDelegate = self
         
         self.add(childVC: UserInfoHeaderVC(user: user), to: self.headerView)
         self.add(childVC: repoItemVC, to: self.detailView)
@@ -108,7 +104,7 @@ class UserInfoVC: UIViewController {
     }
 }
 
-extension UserInfoVC: UserInfoDelegate {
+extension UserInfoVC: ItemInfoDelegate {
     func didTapGithubProfile(for user: User) {
         guard let url = URL(string: user.htmlUrl) else {
             showAlert(title: "Invalid URL", message: "The url attached to this user is invalid.", btnTitle: "OK")
@@ -125,7 +121,7 @@ extension UserInfoVC: UserInfoDelegate {
         }
         
         dismiss(animated: true) {
-            self.followerListDelegate.didRequestFollowers(for: user.login)
+            self.userInfoDelegate.didRequestFollowers(for: user.login)
         }
     }
 }

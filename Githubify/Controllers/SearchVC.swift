@@ -20,6 +20,7 @@ class SearchVC: UIViewController {
         view.backgroundColor = .systemBackground
         // Do any additional setup after loading the view.
         setupKeyboardTapGestures()
+        view.addSubviews(logoImageView, usernameTextField, actionButton)
         configureLogoImageView()
         configureUsernameTextField()
         configureActionButton()
@@ -51,7 +52,6 @@ class SearchVC: UIViewController {
     }
     
     func configureLogoImageView() {
-        view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = Images.githubLogo
         
@@ -64,7 +64,6 @@ class SearchVC: UIViewController {
     }
     
     func configureUsernameTextField() {
-        view.addSubview(usernameTextField)
         usernameTextField.delegate = self
         
         NSLayoutConstraint.activate([
@@ -76,7 +75,6 @@ class SearchVC: UIViewController {
     }
     
     func configureActionButton() {
-        view.addSubview(actionButton)
         actionButton.addTarget(self, action: #selector(showFollowersList), for: .touchUpInside)
         
         NSLayoutConstraint.activate([

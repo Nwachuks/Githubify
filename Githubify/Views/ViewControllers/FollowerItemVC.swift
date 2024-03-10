@@ -24,6 +24,6 @@ class FollowerItemVC: ItemInfoVC {
     
     override func actionBtnTapped() {
         guard let user else { return }
-        userInfoDelegate.didTapGetFollowers(for: user)
+        itemInfoDelegate.didTapGetFollowers(for: user)
     }
 }
