@@ -10,7 +10,6 @@ import UIKit
 class MainButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        // Customise btn
         configure()
     }
     
@@ -18,11 +17,10 @@ class MainButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(backgroundColor: UIColor, title: String) {
-        super.init(frame: .zero)
+    convenience init(backgroundColor: UIColor, title: String) {
+        self.init(frame: .zero)
         self.backgroundColor = backgroundColor
         self.setTitle(title, for: .normal)
-        configure()
     }
     
     private func configure() {
