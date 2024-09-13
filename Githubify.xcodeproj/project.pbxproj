@@ -22,6 +22,10 @@
 		B03CC7FE2C930A09000E5A72 /* RepoWatcherWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B03CC7EE2C930A08000E5A72 /* RepoWatcherWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B03CC8042C93106C000E5A72 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03CC8032C93106C000E5A72 /* Repository.swift */; };
 		B03CC8052C93106C000E5A72 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03CC8032C93106C000E5A72 /* Repository.swift */; };
+		B03CC8072C931E08000E5A72 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B083BCCA2B80F7FA00E406F2 /* NetworkManager.swift */; };
+		B03CC8082C93215A000E5A72 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B076CBA62B8A09AE0042E937 /* AppError.swift */; };
+		B03CC8092C932C48000E5A72 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B083BCC82B80F5BC00E406F2 /* User.swift */; };
+		B03CC80A2C932C4B000E5A72 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = B083BCC62B80F53C00E406F2 /* Follower.swift */; };
 		B04E86AE2B8DBFC600CD9488 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E86AD2B8DBFC600CD9488 /* UserInfoVC.swift */; };
 		B04E86B12B8DC85F00CD9488 /* UserInfoHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E86B02B8DC85F00CD9488 /* UserInfoHeaderVC.swift */; };
 		B04E86B32B8DC8BD00CD9488 /* SubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E86B22B8DC8BD00CD9488 /* SubtitleLabel.swift */; };
@@ -364,7 +368,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B03CC8072C931E08000E5A72 /* NetworkManager.swift in Sources */,
+				B03CC80A2C932C4B000E5A72 /* Follower.swift in Sources */,
 				B03CC7F82C930A08000E5A72 /* RepoWatcherWidget.swift in Sources */,
+				B03CC8092C932C48000E5A72 /* User.swift in Sources */,
+				B03CC8082C93215A000E5A72 /* AppError.swift in Sources */,
 				B03CC7F62C930A08000E5A72 /* RepoWatcherWidgetBundle.swift in Sources */,
 				B03CC8052C93106C000E5A72 /* Repository.swift in Sources */,
 			);

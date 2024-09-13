@@ -14,16 +14,16 @@ struct Repository: Decodable {
     let forks: Int
     let watchers: Int
     let openIssues: Int
-    let pushedAt: String
+    let pushedAt: Date
     
     var daysSinceLastActivity: Int {
         return calculateDaysSinceLastActivity(from: pushedAt)
     }
     
-    func calculateDaysSinceLastActivity(from dateString: String) -> Int {
-        let formatter = ISO8601DateFormatter()
-        let lastActivityDate = formatter.date(from: dateString) ?? .now
-        let daysSinceLastActivity = Calendar.current.dateComponents([.day], from: lastActivityDate, to: .now).day ?? 0
+    func calculateDaysSinceLastActivity(from date: Date) -> Int {
+//        let formatter = ISO8601DateFormatter()
+//        let lastActivityDate = formatter.date(from: dateString) ?? .now
+        let daysSinceLastActivity = Calendar.current.dateComponents([.day], from: date, to: .now).day ?? 0
         return daysSinceLastActivity
     }
     
@@ -31,7 +31,7 @@ struct Repository: Decodable {
                                         owner: Owner(avatarUrl: ""),
                                         hasIssues: true, forks: 75,
                                         watchers: 123, openIssues: 55,
-                                        pushedAt: "2024-03-09T18:19:30Z")
+                                        pushedAt: Date().addingTimeInterval(-10000000))
 }
 
 struct Owner: Decodable {

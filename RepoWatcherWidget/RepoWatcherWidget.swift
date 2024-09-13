@@ -19,18 +19,17 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [RepoEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = RepoEntry(date: entryDate, repo: Repository.placeholder)
-            entries.append(entry)
+        Task {
+            let nextUpdate = Date().addingTimeInterval(43200) // 12 hours in seconds
+            do {
+                let repo = try await NetworkManager.shared.getRepo(atUrl: RepoURL.swiftNews)
+                let entry = RepoEntry(date: .now, repo: repo)
+                let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+                completion(timeline)
+            } catch {
+                print("❌ Error - \(error.localizedDescription)")
+            }
         }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
     }
 }
 
@@ -115,8 +114,8 @@ struct RepoWatcherWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Repo Updates")
+        .description("Keep up-to-date with key stats of Github repos you're interested in")
 //        .contentMarginsDisabled()
         .supportedFamilies([.systemMedium])
     }

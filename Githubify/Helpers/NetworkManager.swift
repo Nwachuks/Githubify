@@ -11,9 +11,14 @@ class NetworkManager {
     static let shared = NetworkManager()
     private let baseUrl = "https://api.github.com/users/"
     let cache = NSCache<NSString, UIImage>()
+    let decoder = JSONDecoder()
     
-    private init() {}
+    private init() {
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+    }
     
+    // MARK: Githubify calls
     func getFollowers(for username: String, page: Int, completion: @escaping (Result<[Follower], AppError>) -> Void) {
         let endpoint = baseUrl + "\(username)/followers?per_page=100&page=\(page)"
         
@@ -22,7 +27,7 @@ class NetworkManager {
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { [self] data, response, error in
             if let _ = error {
                 completion(.failure(.invalidCompletion))
                 return
@@ -39,8 +44,6 @@ class NetworkManager {
             }
             
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let followers = try decoder.decode([Follower].self, from: data)
                 completion(.success(followers))
             } catch {
@@ -75,10 +78,7 @@ class NetworkManager {
             }
             
             do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                decoder.dateDecodingStrategy = .iso8601
-                let user = try decoder.decode(User.self, from: data)
+                let user = try self.decoder.decode(User.self, from: data)
                 completion(.success(user))
             } catch {
                 completion(.failure(.invalidData))
@@ -111,4 +111,29 @@ class NetworkManager {
         }
         task.resume()
     }
+    
+    // MARK: RepoWatcher calls
+    func getRepo(atUrl urlString: String) async throws -> Repository {
+        guard let url = URL(string: urlString) else {
+            throw AppError.invalidRequest
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw AppError.invalidResponse
+        }
+        
+        do {
+            return try decoder.decode(Repository.self, from: data)
+        } catch {
+            throw AppError.invalidData
+        }
+    }
+}
+
+enum RepoURL {
+    static let swiftNews = "https://api.github.com/repos/sallen0400/swift-news"
+    static let publish = "https://api.github.com/repos/johnsundell/publish"
+    static let googleSignIn = "https://api.github.com/repos/google/GoogleSignIn-iOS"
 }
