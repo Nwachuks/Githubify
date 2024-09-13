@@ -77,7 +77,7 @@ fileprivate struct StatLabel: View {
 
 struct RepoMedium_Previews: PreviewProvider {
     static var previews: some View {
-        RepoMediumView(repo: Repository.placeholder)
+        RepoMediumView(repo: MockData.primaryRepo)
             .containerBackground(.fill.tertiary, for: .widget)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }

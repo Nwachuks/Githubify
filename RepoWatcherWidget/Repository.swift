@@ -21,15 +21,6 @@ struct Repository {
     var daysSinceLastActivity: Int {
         Calendar.current.dateComponents([.day], from: pushedAt, to: .now).day ?? 0
     }
-    
-    static let placeholder = Repository(name: "Your Repo",
-                                        owner: Owner(avatarUrl: ""),
-                                        description: "What your repo does",
-                                        hasIssues: true, forks: 75,
-                                        watchers: 123, openIssues: 55,
-                                        pushedAt: Date().addingTimeInterval(-10000000),
-                                        avatarData: Data()
-    )
 }
 
 extension Repository {
