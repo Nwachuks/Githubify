@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> RepoEntry {
-        RepoEntry(date: Date(), repo: Repository.placeholder)
+        RepoEntry(date: Date(), repo: Repository.placeholder, avatarImageData: Data())
     }
 
     func getSnapshot(in context: Context, completion: @escaping (RepoEntry) -> ()) {
-        let entry = RepoEntry(date: Date(), repo: Repository.placeholder)
+        let entry = RepoEntry(date: Date(), repo: Repository.placeholder, avatarImageData: Data())
         completion(entry)
     }
 
@@ -23,7 +23,9 @@ struct Provider: TimelineProvider {
             let nextUpdate = Date().addingTimeInterval(43200) // 12 hours in seconds
             do {
                 let repo = try await NetworkManager.shared.getRepo(atUrl: RepoURL.swiftNews)
-                let entry = RepoEntry(date: .now, repo: repo)
+                let avatarImageData = await NetworkManager.shared.downloadRepoImage(from: repo.owner.avatarUrl)
+                
+                let entry = RepoEntry(date: .now, repo: repo, avatarImageData: avatarImageData ?? Data())
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                 completion(timeline)
             } catch {
@@ -36,6 +38,7 @@ struct Provider: TimelineProvider {
 struct RepoEntry: TimelineEntry {
     let date: Date
     let repo: Repository
+    let avatarImageData: Data
 }
 
 struct RepoWatcherWidgetEntryView : View {
@@ -45,8 +48,10 @@ struct RepoWatcherWidgetEntryView : View {
         HStack {
             VStack(alignment: .leading) {
                 HStack {
-                    Circle()
+                    Image(uiImage: UIImage(data: entry.avatarImageData) ?? UIImage(named: "avatar")!)
+                        .resizable()
                         .frame(width: 50, height: 50)
+                        .clipShape(Circle())
                     
                     Text(entry.repo.name)
                         .font(.title2)
@@ -54,9 +59,10 @@ struct RepoWatcherWidgetEntryView : View {
                         .minimumScaleFactor(0.6)
                         .lineLimit(1)
                 }
-                .padding(.bottom, 6)
+                .padding(.bottom, 2)
                 
-//                Text("This is a test text for the project desc")
+                Text(entry.repo.description)
+                    .padding(.bottom, 1)
                 
                 HStack {
                     StatLabel(value: entry.repo.watchers, systemImageName: "star.fill")
@@ -124,6 +130,6 @@ struct RepoWatcherWidget: Widget {
 #Preview(as: .systemMedium) {
     RepoWatcherWidget()
 } timeline: {
-    RepoEntry(date: .now, repo: Repository.placeholder)
-    RepoEntry(date: .now, repo: Repository.placeholder)
+    RepoEntry(date: .now, repo: Repository.placeholder, avatarImageData: Data())
+    RepoEntry(date: .now, repo: Repository.placeholder, avatarImageData: Data())
 }

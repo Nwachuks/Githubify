@@ -10,6 +10,7 @@ import Foundation
 struct Repository: Decodable {
     let name: String
     let owner: Owner
+    let description: String
     let hasIssues: Bool
     let forks: Int
     let watchers: Int
@@ -29,6 +30,7 @@ struct Repository: Decodable {
     
     static let placeholder = Repository(name: "Your Repo",
                                         owner: Owner(avatarUrl: ""),
+                                        description: "What your repo does",
                                         hasIssues: true, forks: 75,
                                         watchers: 123, openIssues: 55,
                                         pushedAt: Date().addingTimeInterval(-10000000))
