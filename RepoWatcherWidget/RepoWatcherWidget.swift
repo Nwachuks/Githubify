@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> RepoEntry {
-        RepoEntry(date: Date(), repo: Repository.placeholder, avatarImageData: Data())
+        RepoEntry(date: Date(), repo: Repository.placeholder)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (RepoEntry) -> ()) {
-        let entry = RepoEntry(date: Date(), repo: Repository.placeholder, avatarImageData: Data())
+        let entry = RepoEntry(date: Date(), repo: Repository.placeholder)
         completion(entry)
     }
 
@@ -22,10 +22,10 @@ struct Provider: TimelineProvider {
         Task {
             let nextUpdate = Date().addingTimeInterval(43200) // 12 hours in seconds
             do {
-                let repo = try await NetworkManager.shared.getRepo(atUrl: RepoURL.swiftNews)
+                var repo = try await NetworkManager.shared.getRepo(atUrl: RepoURL.swiftNews)
                 let avatarImageData = await NetworkManager.shared.downloadRepoImage(from: repo.owner.avatarUrl)
-                
-                let entry = RepoEntry(date: .now, repo: repo, avatarImageData: avatarImageData ?? Data())
+                repo.avatarData = avatarImageData ?? Data()
+                let entry = RepoEntry(date: .now, repo: repo)
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                 completion(timeline)
             } catch {
@@ -38,73 +38,30 @@ struct Provider: TimelineProvider {
 struct RepoEntry: TimelineEntry {
     let date: Date
     let repo: Repository
-    let avatarImageData: Data
 }
 
 struct RepoWatcherWidgetEntryView : View {
+    @Environment(\.widgetFamily) var family
     var entry: RepoEntry
 
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                HStack {
-                    Image(uiImage: UIImage(data: entry.avatarImageData) ?? UIImage(named: "avatar")!)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                    
-                    Text(entry.repo.name)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .minimumScaleFactor(0.6)
-                        .lineLimit(1)
-                }
-                .padding(.bottom, 2)
-                
-                Text(entry.repo.description)
-                    .padding(.bottom, 1)
-                
-                HStack {
-                    StatLabel(value: entry.repo.watchers, systemImageName: "star.fill")
-                    StatLabel(value: entry.repo.forks, systemImageName: "tuningfork")
-                    StatLabel(value: entry.repo.openIssues, systemImageName: "exclamationmark.triangle.fill")
-                }
+        switch family {
+        case .systemMedium:
+            RepoMediumView(repo: entry.repo)
+        case .systemLarge:
+            VStack(spacing: 36) {
+                RepoMediumView(repo: entry.repo)
+                RepoMediumView(repo: entry.repo)
             }
-            
-            Spacer()
-            
-            VStack {
-                Text("\(entry.repo.daysSinceLastActivity)")
-                    .bold()
-                    .font(.system(size: 60))
-                    .frame(width: 90)
-                    .minimumScaleFactor(0.6)
-                    .lineLimit(1)
-                    .foregroundStyle(entry.repo.daysSinceLastActivity > 50 ? .pink : .green)
-                
-                Text("days ago")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            }
+        case .systemSmall, .systemExtraLarge, .accessoryCircular, .accessoryRectangular, .accessoryInline:
+            EmptyView()
+        @unknown default:
+            EmptyView()
         }
     }
 }
 
-fileprivate struct StatLabel: View {
-    let value: Int
-    let systemImageName: String
-    
-    var body: some View {
-        Label {
-            Text("\(value)")
-                .font(.footnote)
-        } icon: {
-            Image(systemName: systemImageName)
-                .foregroundStyle(.green)
-        }
-        .fontWeight(.medium)
-    }
-}
+
 
 struct RepoWatcherWidget: Widget {
     let kind: String = "RepoWatcherWidget"
@@ -123,13 +80,12 @@ struct RepoWatcherWidget: Widget {
         .configurationDisplayName("Repo Updates")
         .description("Keep up-to-date with key stats of Github repos you're interested in")
 //        .contentMarginsDisabled()
-        .supportedFamilies([.systemMedium])
+        .supportedFamilies([.systemMedium, .systemLarge])
     }
 }
 
-#Preview(as: .systemMedium) {
+#Preview(as: .systemLarge ) {
     RepoWatcherWidget()
 } timeline: {
-    RepoEntry(date: .now, repo: Repository.placeholder, avatarImageData: Data())
-    RepoEntry(date: .now, repo: Repository.placeholder, avatarImageData: Data())
+    RepoEntry(date: .now, repo: Repository.placeholder)
 }

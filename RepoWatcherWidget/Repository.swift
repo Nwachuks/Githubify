@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Repository: Decodable {
+struct Repository {
     let name: String
     let owner: Owner
     let description: String
@@ -16,16 +16,10 @@ struct Repository: Decodable {
     let watchers: Int
     let openIssues: Int
     let pushedAt: Date
+    var avatarData: Data
     
     var daysSinceLastActivity: Int {
-        return calculateDaysSinceLastActivity(from: pushedAt)
-    }
-    
-    func calculateDaysSinceLastActivity(from date: Date) -> Int {
-//        let formatter = ISO8601DateFormatter()
-//        let lastActivityDate = formatter.date(from: dateString) ?? .now
-        let daysSinceLastActivity = Calendar.current.dateComponents([.day], from: date, to: .now).day ?? 0
-        return daysSinceLastActivity
+        Calendar.current.dateComponents([.day], from: pushedAt, to: .now).day ?? 0
     }
     
     static let placeholder = Repository(name: "Your Repo",
@@ -33,7 +27,36 @@ struct Repository: Decodable {
                                         description: "What your repo does",
                                         hasIssues: true, forks: 75,
                                         watchers: 123, openIssues: 55,
-                                        pushedAt: Date().addingTimeInterval(-10000000))
+                                        pushedAt: Date().addingTimeInterval(-10000000),
+                                        avatarData: Data()
+    )
+}
+
+extension Repository {
+    struct CodingData: Decodable {
+        let name: String
+        let owner: Owner
+        let description: String
+        let hasIssues: Bool
+        let forks: Int
+        let watchers: Int
+        let openIssues: Int
+        let pushedAt: Date
+        
+        var repo: Repository {
+            Repository(
+                name: name,
+                owner: owner,
+                description: description,
+                hasIssues: hasIssues, 
+                forks: forks,
+                watchers: watchers,
+                openIssues: openIssues,
+                pushedAt: pushedAt,
+                avatarData: Data()
+            )
+        }
+    }
 }
 
 struct Owner: Decodable {
