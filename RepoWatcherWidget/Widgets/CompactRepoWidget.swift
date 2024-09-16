@@ -92,21 +92,21 @@ struct CompactRepoWidget: Widget {
         }
         .configurationDisplayName("Repo Updates")
         .description("Keep up-to-date with key stats of Github repos you're interested in")
-//        .contentMarginsDisabled()
         .supportedFamilies([.systemMedium, .systemLarge])
+//        .contentMarginsDisabled()
     }
 }
 
-//#Preview(as: .systemLarge ) {
-//    CompactRepoWidget()
-//} timeline: {
-//    CompactRepoEntry(date: .now, repo: MockData.primaryRepo, secondRepo: MockData.secondaryRepo)
+#Preview(as: .systemLarge) {
+    CompactRepoWidget()
+} timeline: {
+    CompactRepoEntry(date: .now, repo: MockData.primaryRepo, secondRepo: MockData.secondaryRepo)
+}
+
+//struct CompactRepoWidget_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CompactRepoEntryView(entry: CompactRepoEntry(date: Date(), repo: MockData.primaryRepo, secondRepo: MockData.secondaryRepo))
+//            .containerBackground(.fill.tertiary, for: .widget)
+//            .previewContext(WidgetPreviewContext(family: .systemLarge))
+//    }
 //}
-
-struct CompactRepoWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        CompactRepoEntryView(entry: CompactRepoEntry(date: Date(), repo: MockData.primaryRepo, secondRepo: MockData.secondaryRepo))
-            .containerBackground(.fill.tertiary, for: .widget)
-            .previewContext(WidgetPreviewContext(family: .systemLarge))
-    }
-}

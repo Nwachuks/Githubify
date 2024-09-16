@@ -16,7 +16,9 @@ struct Repository {
     let watchers: Int
     let openIssues: Int
     let pushedAt: Date
+    
     var avatarData: Data
+    var contributors: [Contributor]
     
     var daysSinceLastActivity: Int {
         Calendar.current.dateComponents([.day], from: pushedAt, to: .now).day ?? 0
@@ -44,7 +46,8 @@ extension Repository {
                 watchers: watchers,
                 openIssues: openIssues,
                 pushedAt: pushedAt,
-                avatarData: Data()
+                avatarData: Data(),
+                contributors: []
             )
         }
     }

@@ -9,6 +9,8 @@ import SwiftUI
 import WidgetKit
 
 struct ContributorMediumView: View {
+    let repo: Repository
+    
     var body: some View {
         VStack {
             HStack {
@@ -21,38 +23,46 @@ struct ContributorMediumView: View {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2),
                       alignment: .leading,
                       spacing: 20) {
-                ForEach(0..<4) { i in
+                ForEach(repo.contributors, id: \.login) { contributor in
                     HStack {
-                        Image(uiImage: UIImage(named: "avatar")!)
+                        Image(uiImage: UIImage(data: contributor.avatarData) ?? UIImage(named: "avatar")!)
                             .resizable()
                             .frame(width: 44, height: 44)
                             .clipShape(Circle())
                         
                         VStack(alignment: .leading) {
-                            Text("Sean Allen")
+                            Text(contributor.login)
                                 .font(.caption)
-                                .minimumScaleFactor(0.7)
+                                .minimumScaleFactor(0.6)
                                 .padding(.bottom, 2)
-                            Text("42")
+                            Text("\(contributor.contributions)")
                                 .font(.caption2)
                                 .foregroundStyle(.secondary)
+                                .id(repo.name)
+                                .transition(.push(from: .trailing))
                         }
                     }
                 }
+            }
+            
+            if repo.contributors.count < 3 {
+                Spacer()
             }
         }
         .padding(.top, 20)
     }
 }
 
-//#Preview {
-//    ContributorMediumView()
-//}
-
-struct ContributorMediumView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContributorMediumView()
-            .containerBackground(.fill.tertiary, for: .widget)
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-    }
+#Preview(as: .systemMedium) {
+    ContributorWidget()
+} timeline: {
+    ContributorEntry(date: .now, repo: MockData.primaryRepo)
 }
+
+//struct ContributorMediumView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContributorMediumView(repo: MockData.primaryRepo)
+//            .containerBackground(.fill.tertiary, for: .widget)
+//            .previewContext(WidgetPreviewContext(family: .systemMedium))
+//    }
+//}
