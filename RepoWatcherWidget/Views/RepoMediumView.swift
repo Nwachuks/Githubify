@@ -77,17 +77,16 @@ fileprivate struct StatLabel: View {
     }
 }
 
-#Preview(as: .systemMedium) {
-    CompactRepoWidget()
+#Preview(as: .systemLarge) {
+    DoubleRepoWidget()
 } timeline: {
-    CompactRepoEntry(date: .now, repo: MockData.secondaryRepo, secondRepo: nil)
-    CompactRepoEntry(date: .now, repo: MockData.primaryRepo, secondRepo: nil)
+    DoubleRepoEntry(date: .now, topRepo: MockData.primaryRepo, bottomRepo: MockData.secondaryRepo)
 }
 
 //struct RepoMedium_Previews: PreviewProvider {
 //    static var previews: some View {
 //        RepoMediumView(repo: MockData.primaryRepo)
 //            .containerBackground(.fill.tertiary, for: .widget)
-//            .previewContext(WidgetPreviewContext(family: .systemMedium))
+//            .previewContext(WidgetPreviewContext(family: .systemLarge))
 //    }
 //}

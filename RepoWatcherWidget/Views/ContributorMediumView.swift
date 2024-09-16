@@ -53,16 +53,16 @@ struct ContributorMediumView: View {
     }
 }
 
-#Preview(as: .systemMedium) {
-    ContributorWidget()
+#Preview(as: .systemLarge) {
+    SingleRepoWidget()
 } timeline: {
-    ContributorEntry(date: .now, repo: MockData.primaryRepo)
+    SingleRepoEntry(date: .now, repo: MockData.primaryRepo)
 }
 
 //struct ContributorMediumView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        ContributorMediumView(repo: MockData.primaryRepo)
 //            .containerBackground(.fill.tertiary, for: .widget)
-//            .previewContext(WidgetPreviewContext(family: .systemMedium))
+//            .previewContext(WidgetPreviewContext(family: .systemLarge))
 //    }
 //}
