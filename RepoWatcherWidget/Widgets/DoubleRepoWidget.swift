@@ -87,11 +87,3 @@ struct DoubleRepoWidget: Widget {
 } timeline: {
     DoubleRepoEntry(date: .now, topRepo: MockData.primaryRepo, bottomRepo: MockData.secondaryRepo)
 }
-
-//struct DoubleRepoWidget_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DoubleRepoEntryView(entry: DoubleRepoEntry(date: Date(), topRepo: MockData.primaryRepo, bottomRepo: MockData.secondaryRepo))
-//            .containerBackground(.fill.tertiary, for: .widget)
-//            .previewContext(WidgetPreviewContext(family: .systemLarge))
-//    }
-//}

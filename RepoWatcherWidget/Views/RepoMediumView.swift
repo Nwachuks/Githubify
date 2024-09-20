@@ -82,11 +82,3 @@ fileprivate struct StatLabel: View {
 } timeline: {
     DoubleRepoEntry(date: .now, topRepo: MockData.primaryRepo, bottomRepo: MockData.secondaryRepo)
 }
-
-//struct RepoMedium_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RepoMediumView(repo: MockData.primaryRepo)
-//            .containerBackground(.fill.tertiary, for: .widget)
-//            .previewContext(WidgetPreviewContext(family: .systemLarge))
-//    }
-//}

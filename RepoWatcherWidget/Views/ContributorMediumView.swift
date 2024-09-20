@@ -58,11 +58,3 @@ struct ContributorMediumView: View {
 } timeline: {
     SingleRepoEntry(date: .now, repo: MockData.primaryRepo)
 }
-
-//struct ContributorMediumView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContributorMediumView(repo: MockData.primaryRepo)
-//            .containerBackground(.fill.tertiary, for: .widget)
-//            .previewContext(WidgetPreviewContext(family: .systemLarge))
-//    }
-//}

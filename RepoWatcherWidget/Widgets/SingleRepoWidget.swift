@@ -109,11 +109,3 @@ struct SingleRepoWidget: Widget {
     SingleRepoEntry(date: .now, repo: MockData.primaryRepo)
     SingleRepoEntry(date: .now, repo: MockData.secondaryRepo)
 }
-
-//struct SingleRepoWidget_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SingleRepoEntryView(entry: SingleRepoEntry(date: Date(), repo: MockData.primaryRepo))
-//            .containerBackground(.fill.tertiary, for: .widget)
-//            .previewContext(WidgetPreviewContext(family: .systemLarge))
-//    }
-//}
